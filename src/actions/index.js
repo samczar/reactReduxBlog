@@ -5,8 +5,10 @@ import jsonpalceholder from '../api/jsonplacholder'
 export const fetchPostsandUsers = () => async (dispatch, getState) => {
 	await dispatch(fetchPosts())
 
-	const userIds = [...new Set(getState().posts.map(post => post.userId))]
-	userIds.forEach(id => dispatch(fetchUser(id)))
+	const userIds = [
+		...new Set(getState().posts.map(post => post.userId))
+	].forEach(id => dispatch(fetchUser(id)))
+	return userIds
 }
 
 export const fetchPosts = () => async dispatch => {
